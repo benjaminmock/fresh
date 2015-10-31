@@ -43,6 +43,14 @@ func watch() {
 				return filepath.SkipDir
 			}
 
+			if len(getExcludedDirectories()) > 0 {
+				for _, value := range getExcludedDirectories() {
+					if value != "" && strings.HasPrefix(path, value) {
+						return filepath.SkipDir
+					}
+				}
+			}
+
 			watchFolder(path)
 		}
 
